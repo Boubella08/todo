@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            /* Prevent scrolling while loader is displayed */
+        }
+
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(0, 0, 0);
+            /* Black overlay with some transparency */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            /* Ensure the overlay is on top of everything */
+        }
+
+        .loader {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin:15px auto;
+  position: relative;
+  color: #FFF;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 50%;
+  left: 50%;
+  transform: scale(0.5) translate(0, 0);
+  background-color: #FFF;
+  border-radius: 50%;
+  animation: animloader 1s infinite ease-in-out;
+}
+.loader::before {
+  background-color: #FF3D00;
+  transform: scale(0.5) translate(-48px, -48px);
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+@keyframes animloader {
+    50% {
+      transform: scale(1) translate(-50%, -50%);
+}
+}
+    
+        /* Hide content initially */
+        #content {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loader Overlay -->
+    <div id="loader-overlay" class="loader-overlay">
+        <span class="loader"></span>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+        <div>
+            <div id="fullpage">
+                <div class="section">
+                    <h1>Section 1</h1>
+                </div>
+                <div class="section">
+                    <div class="slide" data-anchor="slide1">
+                        <h1>Slide 2.1</h1>
+                    </div>
+                    <div class="slide" data-anchor="slide2">
+                        <h1>Slide 2.2</h1>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>Section 3</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Simulate an API request or any async operation
+            setTimeout(() => {
+                hideLoader();
+                showContent();
+            }, 5000); // Replace with your actual data loading logic and time
+
+            function hideLoader() {
+                const loaderOverlay = document.getElementById("loader-overlay");
+                loaderOverlay.style.display = "none";
+            }
+
+            function showContent() {
+                const content = document.getElementById("content");
+                content.style.display = "block";
+            }
+        });
+    </script>
+</body>
+
+</html>
